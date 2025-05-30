@@ -1,0 +1,15 @@
+Voice Assistant Project
+
+Features that I want:
+Should be able to tell me the weather
+Should be able to look at my screen and tell me what I am looking at
+Should be able to open apps
+When a command is said, should be able to perform multiple actions like: python meeting, should open all necessary apps for ta meetings.
+
+Things to figure out, how to have this constantly running in the background like Cortana.
+
+
+should be able to do these things as well:
+ Build an A.I.-powered desktop assistant capable of voice interaction, web browsing, and real-time weather using weather API in Python Programming Language.
+● Integrated with popular daily usage such as scheduling events in the calendar, checking weather and time, and conversation-based creative interaction.
+● Developed with the power of OpenAI’s GPT 3.5 Turbo for enabling dynamic interaction and virtual assistance response.
