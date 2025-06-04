@@ -1,14 +1,20 @@
+#Python libraries
 import pyttsx3
 import pvporcupine
 import pyaudio
 import speech_recognition as sr
 import struct
+from AppOpener import open
+from datetime import datetime
 
+#My files
+import file_search as fs
+import gemini as chat
+import app_opener as ao
+import weather
+
+#Access key for porcupine
 access_key = "AGs3waMEvcfn0ATEEt/NL8sjZaoGY4hT64aeKQYHn4Lnp7XV3GjoNA=="
-
-
-
-
 
 #Wake word detection
 def main():
@@ -27,21 +33,31 @@ def main():
 
     try:
         while True:
+            
             pcm = audio_stream.read(porcupine.frame_length, exception_on_overflow = False)
             pcm_unpacked = struct.unpack_from("h" * porcupine.frame_length, pcm)
             keyword_index = porcupine.process(pcm_unpacked)
             
             if keyword_index >= 0:
-                capture_speech()
+                speech = capture_speech()
+                print("You said: " + speech[0])
+                print("This is speech[1]", speech[1])
                 
-    except KeyboardInterrupt:
-        print("Stopping")
+                if (speech[1] == "exit"):
+                    speak("Shutting Down")
+                    print("Program terminated")
+                    exit()
+                else:
+                    speak(speech[1])
+                    print(speech[1])
+                print("Listening for wake word...")
 
     finally:
         audio_stream.stop_stream()
         audio_stream.close()
         pa.terminate()
         porcupine.delete()
+        
 
 
 #This captures speech
@@ -52,30 +68,45 @@ def capture_speech():
         print("Say something")
         audio = recognizer.listen(source)
 
-
-
         try:
-            text = recognizer.recognize_google(audio)
-            print("You said: " + text)
+            response = recognizer.recognize_google(audio)
+
+            
+            return([response, decision(response)])
+            
         except sr.UnknownValueError:
             print("Sorry couldn't understand audio")
         except sr.RequestError as e:
             print(f"could not request results; {e}")
 
-if __name__ == "__main__":
-    main()
+
+def decision(response):
+
+    decisions=["search", "find", "time is it", "weather", "open", "exit"]
+    decision = 6
+
+    for choice in range(len(decisions)):
+        if response.lower().find(decisions[choice]) != -1:
+            decision = choice
+
+    if decision == 0 or decision == 1:
+        fs.main()
+        return([response,"search"])
+    elif decision == 2:
+
+        return([response, datetime.now().time().strftime("%H:%M:%S")])
+    elif decision == 3:
+        return(weather.weather(response))
+    elif decision == 4:
+        open(ao.opener(response))
+        speak(response)
+    elif decision == 5:
+        return("exit")
+    else:
+        return(chat.general(response))
+        
 
 
-
-
-
-
-
-
-
-
-'''
-# text to speech
 def onStart(name):
     print('starting', name)
 
@@ -87,14 +118,30 @@ def onEnd(name, completed):
     print("Finishing", name, completed)
 
 
+def speak(response):
+        
+    engine = pyttsx3.init()
+
+    engine.connect("started-utterance", onStart)
+    engine.connect("started-word", onWord)
+    engine.connect("finish-utterance", onEnd)
+
+    engine.say(response)
+
+    engine.runAndWait()
 
 
-engine = pyttsx3.init()
+if __name__ == "__main__":
+    while True:
+        main()
+    
 
-engine.connect("started-utterance", onStart)
-engine.connect("started-word", onWord)
-engine.connect("finish-utterance", onEnd)
 
-engine.say("The quick brown fox jumped over the lazy dog.")
 
-engine.runAndWait()'''
+
+
+
+
+
+
+

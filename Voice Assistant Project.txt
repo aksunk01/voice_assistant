@@ -13,3 +13,13 @@ should be able to do these things as well:
  Build an A.I.-powered desktop assistant capable of voice interaction, web browsing, and real-time weather using weather API in Python Programming Language.
 ● Integrated with popular daily usage such as scheduling events in the calendar, checking weather and time, and conversation-based creative interaction.
 ● Developed with the power of OpenAI’s GPT 3.5 Turbo for enabling dynamic interaction and virtual assistance response.
+
+
+
+Need to update:
+File search
+Weather for any city
+Current time
+Being able to add tasks
+Web browsing
+Be able to provide a description of what is going on on my screen
