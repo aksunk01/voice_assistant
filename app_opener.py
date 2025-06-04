@@ -3,7 +3,7 @@ import google.generativeai as genai
 
 #Need to validate the app name somehow
 def opener(prompt):
-    key = "AIzaSyAiofnQ6d84B7KeNFIYTuUVKjx_lvY-Xck"
+    key = #enter your own key
     genai.configure(api_key= key)
     model = genai.GenerativeModel("gemini-1.5-flash")
     
