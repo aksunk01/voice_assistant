@@ -6,7 +6,7 @@ import google.generativeai as genai
 
 #Need to validate the app name somehow
 def weather(prompt):
-    key = "AIzaSyAiofnQ6d84B7KeNFIYTuUVKjx_lvY-Xck"
+    key = #enter your own google gemini key
     genai.configure(api_key= key)
     model = genai.GenerativeModel("gemini-1.5-flash")
     
