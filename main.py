@@ -14,7 +14,7 @@ import app_opener as ao
 import weather
 
 #Access key for porcupine
-access_key = "AGs3waMEvcfn0ATEEt/NL8sjZaoGY4hT64aeKQYHn4Lnp7XV3GjoNA=="
+access_key = #enter your own access key for porcupine listening command
 
 #Wake word detection
 def main():
