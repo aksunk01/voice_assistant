@@ -5,7 +5,7 @@ import os
 
 #Goes to gemini and gets ai generated answers.
 def general(prompt):
-    key = "AIzaSyAiofnQ6d84B7KeNFIYTuUVKjx_lvY-Xck"
+    key = #enter in your own password for google gemini password
     genai.configure(api_key= key)
     model = genai.GenerativeModel("gemini-1.5-flash")
     
